@@ -19,3 +19,12 @@ class VolSurface(object):
         plt.ylabel(r'$\sigma_{BS}(k,t=%.2f)$' % T, fontsize=16)
         plt.grid(True)
         plt.show()
+
+    def plot_surface(self):
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
+        X, Y = np.meshgrid(self.strikes, self.maturities)
+        surf = ax.plot_surface(X, Y, self.implied_vols)
+        plt.xlabel('Log-strike')
+        plt.ylabel('Time to maturity')
+        plt.show()
