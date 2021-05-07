@@ -40,7 +40,7 @@ for eta in etas:
 for rho in rhos:
     scenarios.append(calc_S(-0.3, 2.0, rho, 0))
 for dxi in dxis:
-    scenarios.append(calc_S(-0.3, 2.0, -.07, dxi))
+    scenarios.append(calc_S(-0.3, 2.0, -0.7, dxi))
 
 N = len(scenarios)
 print(N)
