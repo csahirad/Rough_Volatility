@@ -1,6 +1,9 @@
 from utils import *
 from scipy.interpolate import interp1d
 
+"""
+Partial code sourced from: https://github.com/ryanmccrickerd/rough_bergomi
+"""
 
 class RBergomi(object):
     """
