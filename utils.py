@@ -2,6 +2,9 @@ import numpy as np
 from scipy.stats import norm
 from scipy.optimize import brentq
 
+"""
+Code sourced from: https://github.com/ryanmccrickerd/rough_bergomi
+"""
 
 def g(x, a):
     """
