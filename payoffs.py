@@ -53,7 +53,7 @@ def barrier(S, K, B, o='call', Type='up-and-out'):
     return np.mean(payoffs, axis=0)[:, np.newaxis]
 
 
-def cliquet(S, cap=0.05, freq=12, T=1):
+def cliquet(S, cap=5, freq=12, T=1):
     """
     Returns the price of a cliquet option where the payoff is the greater of zero, and the sum of returns at a specific
     frequency(e.g. monthly, quarterly, etc.), capped at a specified rate
@@ -62,12 +62,12 @@ def cliquet(S, cap=0.05, freq=12, T=1):
     return_sum = 0
     ts = np.linspace(0, S.shape[1] - 1, freq * T)
     for i in range(len(ts) - 1):
-        return_sum += np.minimum(cap, S[:, int(ts[i+1])] / S[:, int(ts[i])] - 1)
+        return_sum += np.minimum(cap, S[:, int(ts[i+1])] / S[:, int(ts[i])]*100 - 100)
     payoffs = np.maximum(0, return_sum)
     return np.mean(payoffs, axis=0)
 
 
-def autocallable(S, coupon=0.05, barrier_lvl=0.70, autocall_freq=4, T=1):
+def autocallable(S, coupon=5, barrier_lvl=0.70, autocall_freq=4, T=1):
     """
     Returns the price of autocallable note
     """
@@ -85,12 +85,12 @@ def autocallable(S, coupon=0.05, barrier_lvl=0.70, autocall_freq=4, T=1):
         # Iterate over each observation date
         for j in range(1, len(observation_ts)):
             if S[i, int(observation_ts[j])] > S0:
-                payoffs.append(1 + coupon * j)
+                payoffs.append(100 + coupon * j)
                 break
             elif j < len(observation_ts) - 1:
                 continue
             elif ST > barrier_lvl * S0:
-                payoffs.append(1)
+                payoffs.append(100)
             else:
-                payoffs.append(ST/S0)
+                payoffs.append(ST/S0*100)
     return np.mean(payoffs)
